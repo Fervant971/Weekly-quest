@@ -105,6 +105,51 @@ body{background:var(--bg);color:var(--text);font-family:'Raleway',sans-serif;min
 
 .goal-add-inline-btn{background:rgba(34,211,238,.1);border:1px solid var(--acc);border-radius:8px;padding:.2rem .55rem;font-size:.62rem;font-weight:700;color:var(--acc);font-family:'Raleway',sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .2s}
 .goal-add-inline-btn:active{transform:scale(.95)}
+
+
+/* ── TAB TRANSITIONS ── */
+.tab-page{animation:tabSlideIn .35s cubic-bezier(.34,1.2,.64,1) both}
+@keyframes tabSlideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+
+/* ── STREAK RECORD ── */
+.streak-record{font-size:.55rem;color:var(--muted);margin-top:.15rem}
+.streak-record b{color:#ff9500;font-weight:700}
+
+
+
+/* ── COMBO ── */
+.combo-toast{position:fixed;top:30%;left:50%;transform:translateX(-50%) scale(0);background:linear-gradient(135deg,#a855f7,#ec4899);color:white;padding:.85rem 1.5rem;border-radius:14px;font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;font-weight:700;z-index:9999;pointer-events:none;box-shadow:0 0 30px rgba(168,85,247,.5),0 8px 24px rgba(0,0,0,.4);transition:transform .4s cubic-bezier(.34,1.8,.64,1),opacity .3s;text-align:center;opacity:0}
+.combo-toast.show{transform:translateX(-50%) scale(1);opacity:1}
+.combo-toast.out{transform:translateX(-50%) scale(.85) translateY(-30px);opacity:0}
+.combo-x{font-size:1.6rem;display:block;margin-top:.1rem}
+.combo-bonus{font-size:.65rem;color:#fef9c3;margin-top:.15rem;font-style:normal;font-family:'Raleway',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+
+/* ── TASK ANIMATIONS ── */
+@keyframes taskSlideOut{from{opacity:1;transform:translateX(0);max-height:200px;margin-bottom:.4rem;padding-top:.55rem;padding-bottom:.55rem}to{opacity:0;transform:translateX(40px);max-height:0;margin-bottom:0;padding-top:0;padding-bottom:0}}
+.task-removing{animation:taskSlideOut .35s ease forwards;overflow:hidden;pointer-events:none}
+
+/* ── FAVORITE STAR ── */
+.fav-star{background:none;border:none;cursor:pointer;font-size:1rem;padding:.15rem;-webkit-tap-highlight-color:transparent;transition:transform .15s;opacity:.3;flex-shrink:0}
+.fav-star:active{transform:scale(.85)}
+.fav-star.on{opacity:1;animation:starPop .3s cubic-bezier(.34,1.6,.64,1)}
+@keyframes starPop{0%{transform:scale(1)}50%{transform:scale(1.4) rotate(15deg)}100%{transform:scale(1)}}
+
+/* ── RANK BADGE ── */
+.rank-badge{display:inline-flex;align-items:center;gap:.3rem;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);border-radius:100px;padding:.15rem .55rem;font-size:.62rem;font-weight:700;color:var(--acc)}
+.rank-badge .rank-num{font-family:'Playfair Display',serif;font-style:italic;font-size:.85rem}
+
+/* ── XP COMPARISON ── */
+.xp-compare{font-size:.58rem;color:var(--muted);margin-top:.2rem;text-align:center}
+.xp-compare.up{color:#22c55e}
+.xp-compare.down{color:#f87171}
+
+/* ── WEEKEND BONUS ── */
+.weekend-bonus{background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(236,72,153,.05));border:1px solid rgba(168,85,247,.3);border-radius:12px;padding:.55rem .85rem;display:flex;align-items:center;gap:.55rem;margin-bottom:.65rem;font-size:.7rem;animation:fadeDown .5s .1s ease both}
+.weekend-bonus-icon{font-size:1.3rem}
+.weekend-bonus-text{flex:1}
+.weekend-bonus-title{font-weight:700;color:#c084fc}
+.weekend-bonus-sub{font-size:.58rem;color:var(--muted)}
+
 /* ── PERSONAL GOALS ── */
 .goal-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.85rem;margin-bottom:.65rem;position:relative;overflow:hidden}
 .goal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--goal-grad,linear-gradient(90deg,transparent,var(--acc),transparent))}
@@ -522,7 +567,7 @@ body{background:var(--bg);color:var(--text);font-family:'Raleway',sans-serif;min
 .lb-share:hover{color:var(--acc);background:rgba(0,0,0,.15)}
 
 /* ── AVATAR MODAL ── */
-.avatar-modal{position:fixed;inset:0;z-index:700;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s}
+.avatar-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .25s}
 .avatar-modal.show{opacity:1;pointer-events:all}
 .avatar-modal-card{background:var(--card);border:1px solid var(--border);border-radius:20px 20px 0 0;padding:1.25rem 1rem 2.5rem;width:100%;max-width:480px;transform:translateY(100%);transition:transform .3s cubic-bezier(.34,1.2,.64,1);max-height:80vh;overflow-y:auto}
 .avatar-modal.show .avatar-modal-card{transform:translateY(0)}
@@ -722,20 +767,33 @@ body{background:var(--bg);color:var(--text);font-family:'Raleway',sans-serif;min
 .comp-close:hover{filter:brightness(1.1)}
 
 /* ── LEVELUP OVERLAY ── */
-.lvlup-wrap{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
+.lvlup-wrap{position:fixed;inset:0;z-index:9990;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
 .lvlup-wrap.show{opacity:1;pointer-events:all}
 #lvlUpCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.lvlup-vig{position:absolute;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px)}
-.lvlup-card{position:relative;z-index:5;text-align:center;padding:2.2rem 1.8rem;background:var(--card);border:1px solid rgba(255,255,255,.12);border-radius:22px;max-width:290px;width:90%;opacity:0;transform:scale(.5) translateY(30px)}
-.lvlup-card.pop{animation:luPop .6s cubic-bezier(.34,1.56,.64,1) forwards}
-@keyframes luPop{to{opacity:1;transform:scale(1) translateY(0)}}
-.lvlup-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--acc),var(--acc2),transparent);border-radius:22px 22px 0 0}
-.lvlup-tag{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:.7rem;font-family:'Raleway',sans-serif}
-.lvlup-emoji{font-size:4.5rem;display:block;margin-bottom:.65rem;animation:float 2s ease-in-out infinite;filter:drop-shadow(0 0 20px var(--acc))}
-.lvlup-name{font-family:'Playfair Display',serif;font-style:italic;font-size:2.2rem;font-weight:700;color:var(--acc);text-shadow:0 0 30px var(--acc-glow);line-height:1;display:block;margin-bottom:.3rem}
-.lvlup-num{font-size:.72rem;color:rgba(255,255,255,.35);display:block;letter-spacing:.12em;margin-bottom:1.4rem}
-.lvlup-btn{background:var(--acc);color:var(--bg);border:none;padding:.6rem 1.8rem;border-radius:10px;font-family:'Raleway',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;width:100%;pointer-events:all;transition:filter .2s}
-.lvlup-btn:hover{filter:brightness(1.1)}
+.lvlup-vig{position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(0,0,0,.78),rgba(0,0,0,.95));backdrop-filter:blur(10px)}
+
+/* Static rays (no animation conflict) */
+.lvlup-rays{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center}
+.lvlup-ray{position:absolute;top:50%;left:50%;width:3px;height:60vh;background:linear-gradient(to top,transparent,var(--acc),transparent);transform:translate(-50%,-100%) rotate(var(--rd,0deg));opacity:.3;filter:blur(1px);transform-origin:50% 100%}
+
+.lvlup-card{position:relative;z-index:5;text-align:center;padding:2.5rem 2rem;background:linear-gradient(135deg,var(--card),rgba(10,21,32,.95));border:2px solid rgba(255,255,255,.15);border-radius:24px;max-width:300px;width:90%;opacity:0;transform:scale(.5);box-shadow:0 0 80px var(--acc-glow,rgba(34,211,238,.3)),0 20px 60px rgba(0,0,0,.6)}
+.lvlup-card.pop{animation:luPop .7s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes luPop{0%{opacity:0;transform:scale(.5) translateY(20px)}60%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+.lvlup-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,var(--acc),var(--acc2),var(--acc),transparent);border-radius:24px 24px 0 0}
+
+.lvlup-tag{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--acc);display:block;margin-bottom:.8rem;font-family:'Raleway',sans-serif;font-weight:700}
+
+.lvlup-emoji{font-size:5.5rem;display:block;margin-bottom:.6rem;filter:drop-shadow(0 0 30px var(--acc))}
+.lvlup-card.pop .lvlup-emoji{animation:emojiBounce 1.8s ease-in-out 0.7s infinite}
+@keyframes emojiBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.lvlup-name{font-family:'Playfair Display',serif;font-style:italic;font-size:2.4rem;font-weight:700;color:var(--acc);text-shadow:0 0 30px var(--acc),0 0 60px var(--acc-glow);line-height:1;display:block;margin-bottom:.4rem}
+
+.lvlup-num{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.7);display:block;margin-bottom:1.5rem;line-height:1.2;letter-spacing:.05em}
+.lvlup-num strong{font-size:2.8rem;color:var(--acc);text-shadow:0 0 40px var(--acc),0 0 80px var(--acc-glow);display:block;margin-top:.2rem}
+
+.lvlup-btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:var(--bg);border:none;padding:.7rem 2rem;border-radius:12px;font-family:'Raleway',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;width:100%;pointer-events:all;transition:transform .2s,filter .2s;box-shadow:0 0 20px var(--acc-glow)}
+.lvlup-btn:active{filter:brightness(1.15);transform:scale(.97)}
 
 /* ── THEME MODE ── */
 body.light-mode{--bg:#f0f7f2;--card:#ffffff;--card2:#f9fafb;--border:#d1fae5;--text:#111827;--muted:#6b7280;--muted2:#4b5563;--green:#059669}
@@ -886,6 +944,7 @@ body.light-mode .bottom-nav{background:#ffffff}
 <div class="lvlup-wrap" id="lvlupWrap">
   <canvas id="lvlUpCanvas"></canvas>
   <div class="lvlup-vig"></div>
+  <div class="lvlup-rays" id="lvlupRays"></div>
   <div class="lvlup-card" id="lvlupCard">
     <span class="lvlup-tag">🎉 LEVEL UP !</span>
     <span class="lvlup-emoji" id="luEmoji"></span>
@@ -1013,6 +1072,18 @@ body.light-mode .bottom-nav{background:#ffffff}
     </div>
 
     <!-- STREAK -->
+    <!-- WEEKEND BONUS -->
+    <div id="weekendBonus" style="display:none" class="weekend-bonus">
+      <span class="weekend-bonus-icon">✨</span>
+      <div class="weekend-bonus-text">
+        <div class="weekend-bonus-title">Bonus Week-end x1.5</div>
+        <div class="weekend-bonus-sub">Toutes tes XP sont multipliées aujourd'hui !</div>
+      </div>
+    </div>
+
+    <!-- RANK + XP COMPARISON -->
+    <div id="rankCompare" style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.6rem;flex-wrap:wrap"></div>
+
     <!-- MOOD TRACKING -->
     <div class="mood-bar" id="moodBar">
       <div class="mood-bar-head">
@@ -1032,7 +1103,7 @@ body.light-mode .bottom-nav{background:#ffffff}
       <div class="streak-flame-main" id="streakFlame">🔥</div>
       <div class="streak-info">
         <div class="streak-count-big" id="streakTxt">0</div>
-        <div class="streak-sublabel">Jours de suite</div>
+        <div class="streak-sublabel">Jours de suite</div><div class="streak-record" id="streakRecord"></div>
         <div class="streak-status-pill ok" id="streakStatusPill">🔥 Lance-toi !</div>
       </div>
       <div class="streak-dots" id="streakDots"></div>
@@ -1271,6 +1342,11 @@ body.light-mode .bottom-nav{background:#ffffff}
     <div class="tab-title-bar" id="settingsTitleBar">⚙️ Paramètres</div>
 
     <div class="profile-settings-card">
+      <div class="profile-setting-row" onclick="testLevelUp()" style="border-left:3px solid var(--acc);background:rgba(34,211,238,.05)">
+        <div class="profile-setting-icon">🧪</div>
+        <div class="profile-setting-label">Test animation Level Up</div>
+        <div class="profile-setting-value">→</div>
+      </div>
       <div class="profile-setting-row" onclick="openChangePseudo()">
         <div class="profile-setting-icon">✏️</div>
         <div class="profile-setting-label">Changer de pseudo</div>
@@ -1919,7 +1995,7 @@ let S={
   username:'',
   avatarEmoji:'⚔️',
   avatarColor:'#1e3a4a',
-  totalXP:0, streak:0, streakMax:0,
+  totalXP:0, streak:0, streakMax:0, comboMax:0,
   totalDays:0, perfectDays:0, perfectWeeks:0,
   lastDate:'', nid:300,
   recurringTasks:[],
@@ -2108,16 +2184,21 @@ function buildDayView(){
 
   let html='';
 
+  // Sort: favorites first, keeping original index
+  function sortFav(arr){return arr.map(function(t,i){return{t:t,i:i};}).sort(function(a,b){return (b.t.fav?1:0)-(a.t.fav?1:0);});}
+  var recurringSorted=sortFav(recurring);
+  var daySpecificSorted=sortFav(daySpecific);
+
   // Recurring tasks
   if(recurring.length>0){
     html+=`<div class="sec-label">🔁 Routine quotidienne</div>`;
-    html+=`<div class="tasks-wrap" id="recWrap">${recurring.map((t,ti)=>taskHtml(t,ds,ti,'rec')).join('')}</div>`;
+    html+=`<div class="tasks-wrap" id="recWrap">${recurringSorted.map(function(o){return taskHtml(o.t,ds,o.i,'rec');}).join('')}</div>`;
   }
 
   // Day-specific tasks
   html+=`<div class="sec-label">📌 Tâches du jour</div>`;
   if(daySpecific.length>0){
-    html+=`<div class="tasks-wrap" id="dayWrap">${daySpecific.map((t,ti)=>taskHtml(t,ds,ti,'day')).join('')}</div>`;
+    html+=`<div class="tasks-wrap" id="dayWrap">${daySpecificSorted.map(function(o){return taskHtml(o.t,ds,o.i,'day');}).join('')}</div>`;
   } else {
     html+=`<div style="font-size:.8rem;color:var(--muted);text-align:center;padding:.75rem 0;margin-bottom:1rem">Aucune tâche spécifique pour ce jour</div>`;
   }
@@ -2163,11 +2244,11 @@ function taskHtml(t,ds,ti,type){
   const subsDone=t.subtasks.filter(s=>isSubDone(t.id,s.id,ds)).length;
   const subsTotal=t.subtasks.length;
   const exp=expanded.has(type+'-'+t.id);
-  return `<div class="task-block${done?' all-done':''}" id="tb-${type}-${t.id}">
+  return `<div class="task-block${done?' all-done':''}${t.fav?' is-fav':''}" id="tb-${type}-${t.id}" data-task-key="${type}-${ti}">
     <div class="task-main" onclick="clickMain('${type}',${ti},'${ds}')">
       <div class="task-cb">${done?'✓':''}</div>
       <div class="task-body">
-        <div class="task-name">${t.icon} ${t.name}</div>
+        <div class="task-name">${t.fav?'⭐ ':''}${t.icon} ${t.name}</div>
         <div class="task-meta">
           <span class="task-xp">+${t.xp} XP</span>
           ${type==='rec'?'<span class="rec-badge">quotidien</span>':''}
@@ -2175,6 +2256,7 @@ function taskHtml(t,ds,ti,type){
         </div>
       </div>
       <div class="task-right">
+        <button class="fav-star${t.fav?' on':''}" onclick="event.stopPropagation();toggleFavorite('${type}',${ti})" title="Favori">${t.fav?'⭐':'☆'}</button>
         <button class="exp-btn${exp?' open':''}" onclick="event.stopPropagation();toggleExp('${type}',${t.id})">▼</button>
         <button class="del-btn" onclick="event.stopPropagation();delTask('${type}',${ti})">✕</button>
       </div>
@@ -2270,6 +2352,7 @@ function updateTaskBlock(type,ti,ds){
   renderStreakDots();
   updateStreakDisplay();
   renderMood();
+  updateExtras();
   checkFantome();
   // Update day progress
   renderDayProgress(ds);
@@ -2389,6 +2472,13 @@ function updateStreakDisplay(){
     else flame.classList.remove('inactive');
   }
 
+  // Update streak record display
+  var recEl=document.getElementById('streakRecord');
+  if(recEl){
+    var rec=S.streakMax||0;
+    if(rec>0) recEl.innerHTML='Record : <b>'+rec+'🔥</b>';
+    else recEl.innerHTML='';
+  }
   if(pill){
     if(streakProtected){
       pill.className='streak-status-pill done';
@@ -2434,6 +2524,7 @@ function clickMain(type,ti,ds){
     addXP(t.xp,ds);
     playTick(); vibrate([15,10,30]);
     spawnTaskParticles();
+  triggerCombo();
   // Push to activity feed
   pushFeedEvent('task','a complété <strong>'+t.n+'</strong>','+'+t.xp+' XP','rgba(34,211,238,.1)','#22d3ee');
   // Track Tsunami (10 tasks/day) and Boucle
@@ -2519,15 +2610,31 @@ function renderXPBar(){
 }
 
 function addXP(xp,ds){
+  var oldLvl=getLvl(S.totalXP).n;
   S.totalXP+=xp;
+  var newLvl=getLvl(S.totalXP).n;
   const wk=getWeekKey(new Date(ds));
   S.weekXP[wk]=(S.weekXP[wk]||0)+xp;
   if(!S.xpLog) S.xpLog={};
   S.xpLog[ds]=(S.xpLog[ds]||0)+xp;
   if(xp>=50) playXP();
   spawnXP(xp);
-  checkLvlUp();
-  checkDayComplete(ds);
+  renderXPBar();
+  // If level went up, force checkLvlUp after bar fills
+  if(newLvl>oldLvl){
+    setTimeout(function(){
+      if(prevLvlN>=newLvl) prevLvlN=newLvl-1;
+      checkLvlUp();
+    },500);
+  } else {
+    checkLvlUp();
+  }
+  // Delay day complete check so level up shows first
+  if(newLvl>oldLvl){
+    setTimeout(function(){checkDayComplete(ds);},6500);
+  } else {
+    checkDayComplete(ds);
+  }
   window._wqState=S;
   window.dispatchEvent(new Event('wqXPChange'));
 }
@@ -2730,6 +2837,62 @@ function renderGoals(){
     el.appendChild(card);
   });
 }
+
+
+
+// ── COMBO SYSTEM ──
+var _comboCount=0;
+var _comboTimer=null;
+var _lastComboTime=0;
+
+function triggerCombo(){
+  // Use window-scoped to survive re-renders
+  if(typeof window._comboCount==='undefined') window._comboCount=0;
+  if(typeof window._lastComboTime==='undefined') window._lastComboTime=0;
+  var now=Date.now();
+  // Combo only counts if next task within 60 seconds
+  if(now-window._lastComboTime>60000) window._comboCount=0;
+  window._comboCount++;
+  window._lastComboTime=now;
+
+  if(window._comboCount>=2){
+    showCombo(window._comboCount);
+    // Bonus XP: 5 per combo level
+    var bonus=5*(window._comboCount-1);
+    var ds=dateStr(new Date());
+    if(!S.xpLog) S.xpLog={};
+    S.xpLog[ds]=(S.xpLog[ds]||0)+bonus;
+    S.totalXP+=bonus;
+    if(window._comboCount>(S.comboMax||0)){S.comboMax=window._comboCount;}
+    save();
+  }
+
+  if(window._comboTimer) clearTimeout(window._comboTimer);
+  window._comboTimer=setTimeout(function(){window._comboCount=0;},60000);
+}
+
+function showCombo(n){
+  var toast=document.getElementById('comboToast');
+  var msgEl=document.getElementById('comboMsg');
+  var xEl=document.getElementById('comboX');
+  var bEl=document.getElementById('comboBonus');
+  if(!toast) return;
+  var msgs={2:'COMBO !',3:'TRIPLE !',4:'BIG COMBO !',5:'MEGA COMBO !',6:'ULTRA COMBO !',7:'INSANE !',8:'GODLIKE !',10:'LEGENDARY !'};
+  var msg='COMBO !';
+  Object.keys(msgs).forEach(function(k){if(n>=parseInt(k)) msg=msgs[k];});
+  if(msgEl) msgEl.textContent=msg;
+  if(xEl) xEl.textContent='x'+n;
+  if(bEl) bEl.textContent='+'+(5*(n-1))+' XP BONUS';
+  toast.classList.remove('out');
+  toast.classList.add('show');
+  if(navigator.vibrate) navigator.vibrate([15,10,30]);
+  setTimeout(function(){
+    toast.classList.add('out');
+    toast.classList.remove('show');
+    setTimeout(function(){toast.classList.remove('out');},400);
+  },2000);
+}
+
 
 // ── ACTIVITY FEED ──
 var _feedFilter='all';
@@ -3006,6 +3169,45 @@ document.addEventListener('click',function(){
 });
 
 
+
+function updateExtras(){
+  var today=new Date();
+  var todayStr=today.toISOString().split('T')[0];
+  var isWeekend=today.getDay()===0||today.getDay()===6;
+  // Weekend bonus visible
+  var wb=document.getElementById('weekendBonus');
+  if(wb) wb.style.display=isWeekend?'flex':'none';
+
+  // Rank + XP comparison
+  var rcEl=document.getElementById('rankCompare');
+  if(!rcEl) return;
+  var html='';
+
+  // Rank
+  if(window._lbPlayers&&window._lbPlayers.length>0&&S.username){
+    var rank=window._lbPlayers.findIndex(function(p){return p.username===S.username;});
+    if(rank>=0){
+      var rankIcon=rank===0?'🥇':rank===1?'🥈':rank===2?'🥉':'#'+(rank+1);
+      html+='<div class="rank-badge"><span class="rank-num">'+rankIcon+'</span><span>sur '+window._lbPlayers.length+'</span></div>';
+    }
+  }
+
+  // XP comparison vs yesterday
+  var yest=new Date(today); yest.setDate(today.getDate()-1);
+  var yStr=yest.toISOString().split('T')[0];
+  var todayXP=(S.xpLog&&S.xpLog[todayStr])||0;
+  var yestXP=(S.xpLog&&S.xpLog[yStr])||0;
+  if(yestXP>0||todayXP>0){
+    var diff=todayXP-yestXP;
+    var cls=diff>0?'up':diff<0?'down':'';
+    var arrow=diff>0?'▲':diff<0?'▼':'=';
+    var txt=diff===0?'Identique à hier':(diff>0?'+'+diff+' XP vs hier':diff+' XP vs hier');
+    html+='<div class="xp-compare '+cls+'" style="margin:0;flex:1;text-align:right">'+arrow+' '+txt+'</div>';
+  }
+
+  rcEl.innerHTML=html;
+}
+
 // ── MOOD TRACKING ──
 function selectMood(emoji, label, el){
   var today = new Date().toISOString().split('T')[0];
@@ -3060,20 +3262,54 @@ function checkDayComplete(ds){
   const dk=DAYS_KEY[new Date(ds).getDay()];
   const tasks=[...S.recurringTasks,...(S.dayTasks[dk]||[])];
   if(tasks.length>0&&tasks.every(t=>isDone(t,ds))){
+    var oldLvl=getLvl(S.totalXP).n;
     const bonus=50; S.totalXP+=bonus;
+    var newLvl=getLvl(S.totalXP).n;
     const wk=getWeekKey(new Date(ds)); S.weekXP[wk]=(S.weekXP[wk]||0)+bonus;
-    document.getElementById('compTitle').textContent='Journée complète !';
-    document.getElementById('compSub').textContent='Toutes les tâches du jour terminées. +50 XP bonus !';
-    document.getElementById('compXP').textContent='+'+bonus+' XP Bonus 🎉';
-    document.getElementById('compOverlay').classList.add('show');
+    if(!S.xpLog) S.xpLog={};
+    S.xpLog[ds]=(S.xpLog[ds]||0)+bonus;
+    save();
     checkWeekComplete();
+    checkBadges();
+    if(newLvl>oldLvl){
+      // Level up replaces the comp overlay (more impactful)
+      if(prevLvlN>=newLvl) prevLvlN=newLvl-1;
+      checkLvlUp();
+    } else {
+      renderXPBar();
+      document.getElementById('compTitle').textContent='Journée complète !';
+      document.getElementById('compSub').textContent='Toutes les tâches du jour terminées. +50 XP bonus !';
+      document.getElementById('compXP').textContent='+'+bonus+' XP Bonus 🎉';
+      document.getElementById('compOverlay').classList.add('show');
+      setTimeout(closeComp,4000);
+    }
   }
 }
 
 function checkWeekComplete(){
   const wd=getWeekDates();
   const allDone=wd.every(d=>{ const ds2=dateStr(d); const dk=DAYS_KEY[d.getDay()]; const ts=[...S.recurringTasks,...(S.dayTasks[dk]||[])]; return ts.length===0||ts.every(t=>isDone(t,ds2)); });
-  if(allDone){ const bonus=200; S.totalXP+=bonus; const wk=getWeekKey(new Date()); S.weekXP[wk]=(S.weekXP[wk]||0)+bonus; S.perfectWeeks++; }
+  if(allDone){
+    var oldLvl=getLvl(S.totalXP).n;
+    const bonus=200; S.totalXP+=bonus;
+    var newLvl=getLvl(S.totalXP).n;
+    const wk=getWeekKey(new Date()); S.weekXP[wk]=(S.weekXP[wk]||0)+bonus;
+    var ds=dateStr(new Date());
+    if(!S.xpLog) S.xpLog={};
+    S.xpLog[ds]=(S.xpLog[ds]||0)+bonus;
+    S.perfectWeeks++;
+    save();
+    renderXPBar();
+    if(newLvl>oldLvl){
+      setTimeout(function(){
+        if(prevLvlN>=newLvl) prevLvlN=newLvl-1;
+        checkLvlUp();
+      },500);
+    } else {
+      checkLvlUp();
+    }
+    checkBadges();
+  }
 }
 
 function closeComp(){ document.getElementById('compOverlay').classList.remove('show'); }
@@ -3104,11 +3340,37 @@ function addTask(){
 
 function delTask(type,ti){
   const arr=type==='rec'?S.recurringTasks:(S.dayTasks[curDayKey]||[]);
-  const removed=arr.splice(ti,1)[0];
+  var task=arr[ti];
+  if(!task) return;
+  // Confirmation
+  if(!confirm('Supprimer la tâche "'+task.name+'" ?')) return;
+  var taskEl=document.querySelector('[data-task-key="'+type+'-'+ti+'"]');
+  var removed=task;
+  if(taskEl){
+    taskEl.classList.add('task-removing');
+    setTimeout(function(){
+      arr.splice(ti,1);
+      save();
+      taskEl.remove();
+      updateStreakDisplay();
+      renderDayProgress(dateStr(new Date()));
+      showToast('Tâche supprimée — Annuler ?',function(){
+        arr.splice(ti,0,removed); save(); render();
+      });
+    },350);
+  } else {
+    arr.splice(ti,1); save(); render();
+    showToast('Tâche supprimée — Annuler ?',function(){
+      arr.splice(ti,0,removed); save(); render();
+    });
+  }
+}
+
+function toggleFavorite(type,ti){
+  var t=getTask(type,ti);
+  if(!t) return;
+  t.fav=!t.fav;
   save(); render();
-  showToast('Tâche supprimée',()=>{
-    arr.splice(ti,0,removed); save(); render();
-  });
 }
 
 function addSub(type,ti){
@@ -3321,14 +3583,27 @@ function checkBonusComplete(ds){
   const allDone=quests.every(q=>getBonusState(ds,q.id).done);
   if(allDone&&!S.bonusBonus[ds]){
     S.bonusBonus[ds]=true;
+    var oldLvl=getLvl(S.totalXP).n;
     S.totalXP+=100;
+    var newLvl=getLvl(S.totalXP).n;
     const wk=getWeekKey(new Date(ds)); S.weekXP[wk]=(S.weekXP[wk]||0)+100;
+    if(!S.xpLog) S.xpLog={};
+    S.xpLog[ds]=(S.xpLog[ds]||0)+100;
     spawnXP(100);
-    document.getElementById('compTitle').textContent='Quêtes bonus terminées !';
-    document.getElementById('compSub').textContent='Tu as complété les 3 quêtes bonus du jour !';
-    document.getElementById('compXP').textContent='+100 XP Bonus 🎉';
-    document.getElementById('compOverlay').classList.add('show');
     save();
+    checkBadges();
+    if(newLvl>oldLvl){
+      // Level up replaces comp overlay
+      if(prevLvlN>=newLvl) prevLvlN=newLvl-1;
+      checkLvlUp();
+    } else {
+      renderXPBar();
+      document.getElementById('compTitle').textContent='Quêtes bonus terminées !';
+      document.getElementById('compSub').textContent='Tu as complété les 3 quêtes bonus du jour !';
+      document.getElementById('compXP').textContent='+100 XP Bonus 🎉';
+      document.getElementById('compOverlay').classList.add('show');
+      setTimeout(closeComp,4000);
+    }
   }
 }
 
@@ -3991,39 +4266,105 @@ function fireLvlUpParticles(acc){
   luPartsAnim=requestAnimationFrame(loop);
 }
 
+function testLevelUp(){
+  // Force show the level up overlay for testing
+  var fakeLvl=Math.min((getLvl(S.totalXP).n||1)+1,15);
+  var oldPrev=prevLvlN;
+  prevLvlN=fakeLvl-1; // force the condition
+  S._testXPSave=S.totalXP;
+  S.totalXP=LEVELS[fakeLvl-1].xp+1; // force level up
+  checkLvlUp();
+  // Restore after a moment so we don't break anything
+  setTimeout(function(){
+    S.totalXP=S._testXPSave;
+    prevLvlN=oldPrev;
+    delete S._testXPSave;
+  },100);
+}
+
+var _lvlUpLastShownAt=0;
 function checkLvlUp(){
+  // Hard time guard: ignore any call within 7s after a show
+  var now=Date.now();
+  if(now-_lvlUpLastShownAt<7000) return;
+  if(lvlUpActive) return;
   const cur=getLvl(S.totalXP).n;
   if(cur>prevLvlN){
+    _lvlUpLastShownAt=now;
     prevLvlN=cur;
-    const l=LEVELS[cur-1];
-    var acc=wv(l.anim?[l.acc,l.acc2||l.acc,l.acc]:['#f59e0b','#fbbf24','#f59e0b'],.3,Date.now()/1000)||l.acc||'#f59e0b';
-    document.getElementById('luEmoji').textContent=l.e;
-    document.getElementById('luName').textContent=l.t;
-    document.getElementById('luNum').textContent='Level '+cur+' / 15';
     lvlUpActive=true; lvlUpN=cur;
-    // Reset card animation
-    var card=document.getElementById('lvlupCard');
-    card.classList.remove('pop');
-    card.style.opacity='0';card.style.transform='scale(.5) translateY(30px)';
-    document.getElementById('lvlupWrap').classList.add('show');
-    // Fire particles then pop card
-    fireLvlUpParticles(acc);
-    setTimeout(function(){card.classList.add('pop');},150);
-    playLevelUp();
-    vibrate([100,50,100,50,200]);
+    const l=LEVELS[cur-1];
+    if(!l){ lvlUpActive=false; return; }
+    var acc=l.acc||'#f59e0b';
+    var emojiEl=document.getElementById('luEmoji');
+    var nameEl=document.getElementById('luName');
+    var numEl=document.getElementById('luNum');
+    var wrapEl=document.getElementById('lvlupWrap');
+    var cardEl=document.getElementById('lvlupCard');
+    if(!wrapEl||!cardEl){lvlUpActive=false;return;}
+
+    if(emojiEl) emojiEl.textContent=l.e;
+    if(nameEl) nameEl.textContent=l.t;
+    if(numEl) numEl.innerHTML='Niveau <strong>'+cur+'</strong>';
+
+    wrapEl.style.display='flex';
+    wrapEl.style.opacity='';
+    wrapEl.style.pointerEvents='';
+
+    cardEl.classList.remove('pop');
+    cardEl.style.transition='none';
+    cardEl.style.opacity='0';
+    cardEl.style.transform='scale(.5) translateY(20px)';
+
+    var raysEl=document.getElementById('lvlupRays');
+    if(raysEl&&raysEl.children.length<10){
+      raysEl.innerHTML='';
+      for(var ri=0;ri<10;ri++){
+        var ray=document.createElement('div');
+        ray.className='lvlup-ray';
+        ray.style.setProperty('--rd',(ri*36)+'deg');
+        raysEl.appendChild(ray);
+      }
+    }
+
+    void wrapEl.offsetWidth;
+    wrapEl.classList.add('show');
+
+    setTimeout(function(){
+      cardEl.style.transition='';
+      cardEl.classList.add('pop');
+    },80);
+
+    if(typeof playLevelUp==='function') playLevelUp();
+    if(typeof vibrate==='function') vibrate([100,50,100,50,200]);
+
+    if(window._lvlUpAutoTimer) clearTimeout(window._lvlUpAutoTimer);
+    window._lvlUpAutoTimer=setTimeout(closeLvlUp,6000);
+  } else {
+    lvlUpActive=false;
   }
 }
 function closeLvlUp(){
+  if(!lvlUpActive) return;
   lvlUpActive=false;
+  if(window._lvlUpAutoTimer){clearTimeout(window._lvlUpAutoTimer);window._lvlUpAutoTimer=null;}
   if(luPartsAnim){cancelAnimationFrame(luPartsAnim);luPartsAnim=null;}
   var card=document.getElementById('lvlupCard');
-  card.style.transition='opacity .2s,transform .2s';
-  card.style.opacity='0';card.style.transform='scale(.8)';
+  var wrap=document.getElementById('lvlupWrap');
+  if(!card||!wrap) return;
+  card.style.transition='opacity .25s,transform .25s';
+  card.style.opacity='0';
+  card.style.transform='scale(.85)';
+  wrap.classList.remove('show');
   setTimeout(function(){
-    document.getElementById('lvlupWrap').classList.remove('show');
+    wrap.style.display='none';
     card.classList.remove('pop');
     card.style.transition='';
-  },250);
+    card.style.opacity='';
+    card.style.transform='';
+    // Update bar silently AFTER everything is closed
+    if(typeof renderXPBar==='function') renderXPBar();
+  },300);
 }
 
 // ═══════════════════════════════════════════════
@@ -4485,12 +4826,26 @@ function runSplash(cb){
   },3200);
 }
 
-runSplash(function(){
-  setTimeout(showQuote, 100);
-});
-render();
-applyLangToUI();
-if(!S.username) document.getElementById('profileModal').classList.remove('hidden');
+// Show quote BEFORE the interface (during splash)
+var today=new Date().toISOString().split('T')[0];
+var shouldShowQuote=localStorage.getItem('wq_last_quote')!==today;
+
+if(shouldShowQuote){
+  // Show splash first, then quote, then interface
+  runSplash(function(){
+    showQuote();
+  });
+  // Render interface in background but keep splash visible until quote closes
+  render();
+  applyLangToUI();
+  if(!S.username) document.getElementById('profileModal').classList.remove('hidden');
+} else {
+  // No quote today — normal flow
+  runSplash(function(){});
+  render();
+  applyLangToUI();
+  if(!S.username) document.getElementById('profileModal').classList.remove('hidden');
+}
 setTimeout(startTutoIfNeeded, 3400);
 checkWeeklyReport();
 updateFreezeUI();
@@ -4559,9 +4914,25 @@ function playBonus(){
 }
 
 function playLevelUp(){
-  var notes=[523,659,784,1047,1319];
-  notes.forEach(function(n,i){ playTone(n,0.18,0.15,'sine',i*0.12); });
-  playTone(1047,0.5,0.2,'sine',0.7);
+  // Triumphant fanfare - ascending heroic chord
+  // Bass note pulse first (impact)
+  playTone(130,0.3,0.18,'sine',0);
+  playTone(65,0.4,0.15,'sine',0);
+  // Quick ascending notes
+  var notes=[523,659,784,1047];
+  notes.forEach(function(n,i){
+    playTone(n,0.15,0.18,'sine',0.05+i*0.08);
+    playTone(n*2,0.12,0.08,'triangle',0.05+i*0.08);
+  });
+  // Final triumphant chord (C major)
+  playTone(523,0.7,0.18,'sine',0.45);  // C
+  playTone(659,0.7,0.16,'sine',0.45);  // E
+  playTone(784,0.7,0.14,'sine',0.45);  // G
+  playTone(1047,0.9,0.20,'sine',0.45); // C high
+  playTone(1568,0.8,0.10,'triangle',0.5); // sparkle
+  // Sparkle tail
+  playTone(2093,0.4,0.08,'sine',0.7);
+  playTone(2637,0.3,0.06,'sine',0.85);
 }
 
 function playBadge(){
@@ -5652,6 +6023,13 @@ if('serviceWorker' in navigator){
     <button class="gm-save" onclick="saveGoal()">Créer l'objectif</button>
     <button class="gm-cancel" onclick="closeGoalModal()">Annuler</button>
   </div>
+</div>
+
+<!-- COMBO TOAST -->
+<div class="combo-toast" id="comboToast">
+  <span id="comboMsg">COMBO !</span>
+  <span class="combo-x" id="comboX">x3</span>
+  <span class="combo-bonus" id="comboBonus">+10 XP Bonus</span>
 </div>
 
 <!-- STREAK UNLOCK OVERLAY -->
